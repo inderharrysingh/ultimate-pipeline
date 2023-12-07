@@ -1,28 +1,25 @@
 pipeline {
     agent {
 		docker {
-			image 'node:lts-buster-slim'
+			image 'node'
 		}
 	}
 	
 
 	
     stages {
-        stage('testing') {
+        stage('pre-build') {
             steps {
                 script {
-					sh 'echo "Starting the testing step...."'
-					sh 'echo $TAG'
+					sh ' npm cache clean --force '
                 }
             }
 }
 	        
         stage('build') {
             	steps {
-                	sh 'npm cache clean --force'
-                	sh 'npm ci'
-	
-        	    }
+                	sh 'npm install'	
+    	   	 }
 	        }
 	
 
