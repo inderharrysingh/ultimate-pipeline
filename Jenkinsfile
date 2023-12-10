@@ -37,6 +37,19 @@ pipeline {
 	// 		}
     //      }
     //  }
+			stage('testing with SNYK'){
+			steps {
+				
+				sh 'echo "testing"'
+				
+				 snykSecurity(
+					snykInstallation: 'Snyk',
+					snykTokenId: 'SNYK_API',
+					additionalArguments: '--all-projects'
+					)
+			}
+		}
+
 
 	// stage('update gitrepo for argo cd '){
 	// 	steps{
