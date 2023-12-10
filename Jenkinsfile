@@ -28,9 +28,10 @@ pipeline {
 			 
 			  steps {
 				// def scannerHome = tool 'SonarScanner'
-				withSonarQubeEnv('sonar-server-env') {
-					sh "sonar-scanner"
-				}
+				 script {
+                    // Use the SONARQUBE_SCANNER_HOME variable to locate the SonarQube Scanner executable
+                    sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
+                }
 			  }
 			}
 
