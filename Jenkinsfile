@@ -27,11 +27,13 @@ pipeline {
 		  stage('SonarQube Analysis') {
 			 
 			  steps {
-				// def scannerHome = tool 'SonarScanner'
-				 script {
-                    // Use the SONARQUBE_SCANNER_HOME variable to locate the SonarQube Scanner executable
-                    sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
-                }
+				
+				script {
+						def scannerHome = tool 'SonarScanner'
+							withSonarQubeEnv('sonar-server-env') {
+							sh "${scannerHome}/bin/sonar-scanner"
+				}
+				}
 			  }
 			}
 
