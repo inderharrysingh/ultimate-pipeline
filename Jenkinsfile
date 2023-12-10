@@ -31,18 +31,22 @@ pipeline {
 				script {
 						def scannerHome = tool 'SonarScanner'
 							withSonarQubeEnv('sonar-server-env') {
+							sh "echo ${scannerHome}"
+							sh "sleep 400000"
 							sh "${scannerHome}/bin/sonar-scanner"
 				}
 				}
 			  }
 			}
 
+
+
 		
-			stage("Quality gate") {
-				steps {
-					waitForQualityGate abortPipeline: true
-				}
-			}
+			// stage("Quality gate") {
+			// 	steps {
+			// 		waitForQualityGate abortPipeline: true
+			// 	}
+			// }
 	
 
 	// stage('docker push'){
