@@ -29,7 +29,7 @@ pipeline {
 			  steps {
 				// def scannerHome = tool 'SonarScanner'
 				withSonarQubeEnv('sonar-server-env') {
-					// sh "${scannerHome}/bin/sonar-scanner"
+					sh "sonar-scanner"
 				}
 			  }
 			}
