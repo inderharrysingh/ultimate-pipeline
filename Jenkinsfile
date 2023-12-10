@@ -23,6 +23,20 @@ pipeline {
                 	sh 'npm install'	
     	   	 }
 	        }
+
+		  stage('SonarQube Analysis') {
+				def scannerHome = tool 'SonarScanner';
+				withSonarQubeEnv('sonar-server-env') {
+					sh "${scannerHome}/bin/sonar-scanner"
+				}
+			}
+
+		
+			stage("Quality gate") {
+				steps {
+					waitForQualityGate abortPipeline: true
+				}
+			}
 	
 
 	// stage('docker push'){
@@ -37,18 +51,7 @@ pipeline {
 	// 		}
     //      }
     //  }
-			stage('testing with SNYK'){
-			steps {
-				
-				sh 'echo "testing"'
-				
-				 snykSecurity(
-					snykInstallation: 'Snyk',
-					snykTokenId: 'SNYK_API',
-					additionalArguments: '--all-projects --debug'
-					)
-			}
-		}
+	
 
 
 	// stage('update gitrepo for argo cd '){
