@@ -13,7 +13,7 @@ pipeline {
         stage('pre-build') {
             steps {
                 script {
-					sh ' npm cache clean --force '
+					sh ' echo "nothing..."'
                 }
             }
 }
