@@ -35,7 +35,9 @@ pipeline {
 			 
 			  steps {
 				
-				script {						
+				script {	
+							sh 'echo "pandu..."'					
+							sh 'ls'					
 							withSonarQubeEnv('sonar-server-env') {
 							sh "sonar-scanner"
 				}
