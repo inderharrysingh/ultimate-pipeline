@@ -1,0 +1,18 @@
+FROM node 
+
+RUN  wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip \
+     && unzip sonar-scanner-cli-4.8.0.2856-linux.zip \
+     &&  mv sonar-scanner-4.8.0.2856-linux/ /opt/sonar-scanner \ 
+     && ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner \
+     && echo 'export PATH="/opt/sonar-scanner/bin:$PATH"' >> ~/.bashrc source ~/.bashrc
+
+
+
+
+
+
+
+
+
+
+ 

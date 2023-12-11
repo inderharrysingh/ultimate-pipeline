@@ -25,28 +25,30 @@ pipeline {
 	        }
 
 		  stage('SonarQube Analysis') {
+
+			 agent {
+                docker {
+                    image 'sonarsource/sonar-scanner-cli:latest'
+                    args '-v ${PWD}:/usr/src/app'
+                }
+            }
 			 
 			  steps {
 				
-				script {
-						def scannerHome = tool 'SonarScanner'
+				script {						
 							withSonarQubeEnv('sonar-server-env') {
-							sh "echo ${scannerHome}"
-							sh "sleep 400000"
-							sh "${scannerHome}/bin/sonar-scanner"
+							sh "sonar-scanner"
 				}
-				}
+			}
 			  }
 			}
 
-
-
 		
-			// stage("Quality gate") {
-			// 	steps {
-			// 		waitForQualityGate abortPipeline: true
-			// 	}
-			// }
+			stage("Quality gate") {
+				steps {
+					waitForQualityGate abortPipeline: true
+				}
+			}
 	
 
 	// stage('docker push'){
