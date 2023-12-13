@@ -29,7 +29,8 @@ pipeline {
 				steps {
 					
 					script {	
-								sh 'ls /opt'					
+								sh 'ls /opt'
+								sh 'sleep 80000'					
 								withSonarQubeEnv('sonar-server-env') {
 									
 						}
