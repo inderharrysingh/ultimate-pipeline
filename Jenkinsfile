@@ -13,7 +13,9 @@ pipeline {
         stage('pre-build') {
             steps {
                 script {
-					sh ' echo "nothing..."'
+					sh 'apt-get update'
+					sh 'apt-get install default-jre'
+					
                 }
             }
 }
