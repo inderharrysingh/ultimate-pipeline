@@ -6,6 +6,12 @@ pipeline {
 
 		}
 	}
+
+	environment {
+
+                scannerHome = tool 'SonarScanner'
+
+  }
 	
 
 	
@@ -29,10 +35,10 @@ pipeline {
 				steps {
 					
 					script {	
-								sh 'ls /opt'
+						  		echo "${scannerHome}"
 								sh 'sleep 80000'					
 								withSonarQubeEnv('sonar-server-env') {
-									
+								 sh "${scannerHome}/bin/sonar-scanner"
 						}
 
 					}
