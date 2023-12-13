@@ -7,15 +7,21 @@ pipeline {
 		}
 	}
 
+	environment {
+
+                scannerHome = tool 'SonarScanner'
+
+  }
+	
 
 	
     stages {
         stage('pre-build') {
             steps {
                 script {
+					sh ' echo "nothing..."'
 					sh 'apt-get update'
-					sh 'apt-get install default-jre'
-					
+					sh 'apt-get install default-jre default-jdk'
                 }
             }
 }
@@ -31,11 +37,11 @@ pipeline {
 				steps {
 					
 					script {	
+						  		
+								sh 'sleep 80000'					
 								withSonarQubeEnv('sonar-server-env') {
-								 sh "npx sonarqube-scanner "
+								 sh "${scannerHome}/bin/sonar-scanner"
 						}
-
-						sh 'sleep 80000'
 
 					}
 			  }
