@@ -25,25 +25,18 @@ pipeline {
 	        }
 
 		  stage('SonarQube Analysis') {
-
-			 agent {
-                docker {
-                    image 'sonarsource/sonar-scanner-cli:latest'
-                    args '-v ${PWD}:/usr/src/app'
-                }
-            }
-			 
-			  steps {
 				
-				script {	
-							sh 'echo "pandu..."'					
-							sh 'ls'					
-							withSonarQubeEnv('sonar-server-env') {
-							sh "sonar-scanner"
-				}
-			}
+				steps {
+					
+					script {	
+								sh 'ls /opt'					
+								withSonarQubeEnv('sonar-server-env') {
+									
+						}
+
+					}
 			  }
-			}
+		}
 
 		
 			stage("Quality gate") {
